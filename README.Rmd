@@ -1251,6 +1251,25 @@ biomes <- geobr::read_biomes(showProgress = FALSE)
 sifdf <- readr::read_rds('SIF/data/sif_0.5deg_full_trend.rds')
 ```
 
+```{r}
+biomes2015 <- biomes |> dplyr::mutate(year=2015)
+biomes2016 <- biomes |> dplyr::mutate(year=2016)
+biomes2017 <- biomes |> dplyr::mutate(year=2017)
+biomes2018 <- biomes |> dplyr::mutate(year=2018)
+biomes2020 <- biomes |> dplyr::mutate(year=2020)
+biomes2021 <- biomes |> dplyr::mutate(year=2021)
+biomes2022 <- biomes |> dplyr::mutate(year=2022)
+
+biomes <- rbind(biomes,biomes2015,biomes2016,
+                biomes2017,biomes2018,biomes2020,
+                biomes2021,biomes2022)
+
+biomes
+
+rm(biomes2015,biomes2016,
+                biomes2017,biomes2018,biomes2020,
+                biomes2021,biomes2022)
+```
 
 ## **Data Overview**
 
@@ -1360,7 +1379,7 @@ sif_medians <- sifdf_filter |>
 biomes |>
   dplyr::filter(name_biome!="Sistema Costeiro") |> 
   ggplot2::ggplot()+
-  ggspatial::annotation_map_tile(type = "cartolight")+
+  #ggspatial::annotation_map_tile(type = "cartolight")+
   ggplot2::geom_sf(data=south_america,col='grey',fill='white')+
   ggplot2::geom_sf(col='black',fill='grey50')+
   ggplot2::ylim(-35,5.5)+
@@ -1478,7 +1497,7 @@ my_phi_matrix |> dplyr::glimpse()
 biomes |>
   dplyr::filter(name_biome!="Sistema Costeiro") |> 
   ggplot2::ggplot()+
-  ggspatial::annotation_map_tile(type = "cartolight")+
+  #ggspatial::annotation_map_tile(type = "cartolight")+
   ggplot2::geom_sf(data=south_america,col='grey',fill='white')+
   ggplot2::geom_sf(col='black',fill='grey50')+
   ggplot2::ylim(-35,5.5)+
